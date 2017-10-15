@@ -3,9 +3,8 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import model.StatusOfMemory;
 import parsers.Parser;
-
+import parsers.StatusOfMemory;
 
 public class Main {
 
@@ -16,9 +15,10 @@ public class Main {
 			process.waitFor();
 			Parser.parseHDDInfo(new BufferedReader(new InputStreamReader(process.getInputStream())));
 			process.destroy();
-			StatusOfMemory.getSpace("/");
-			StatusOfMemory.getSpace("/windows");
-			StatusOfMemory.getSpace("/d");
+			process = Runtime.getRuntime().exec("df -m");
+			process.waitFor();
+			StatusOfMemory.getSpace(new BufferedReader(new InputStreamReader(process.getInputStream())));
+			process.destroy();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

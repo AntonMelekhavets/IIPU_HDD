@@ -27,7 +27,7 @@ public class Parser {
 			for (Paterns template : Paterns.values()) {
 				matcher = Pattern.compile(".+" + template.toString() + "(.+)").matcher(commandLine);
 				if (matcher.matches()) {
-					if(template == Paterns.Standarts)
+					if (template == Paterns.Standarts)
 						System.out.print("Standarts:");
 					else
 						System.out.print(template.toString());
